@@ -10,8 +10,18 @@ export class LeadController {
     ) {}
 
     /**
+     * GET /
+     * Root endpoint to verify server is running.
+     */
+    @httpGet("/")
+    async getRoot(req: Request, res: Response) {
+        return res.status(200).send("Lead Profiling Server is running successfully!");
+    }
+
+    /**
      * POST /analyze
      * Import and analyze provided lead data JSON.
+
      * If request body contains an array of leads, uses that.
      * Otherwise, falls back to reading from sample_lead_data.json.
      */
