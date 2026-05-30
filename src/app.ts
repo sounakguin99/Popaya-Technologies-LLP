@@ -1,6 +1,13 @@
 import "reflect-metadata";
 import { InversifyExpressServer } from "inversify-express-utils";
-import container from "../inversify.config.ts";
+import express from "express";
+import container from "../inversify.config";
 
 const server = new InversifyExpressServer(container);
+
+// Configure Express middleware
+server.setConfig((app) => {
+    app.use(express.json({ limit: "10mb" })); // Support large lead data payloads
+});
+
 server.build().listen(8000, () => console.log("Server started on port 8000"));
